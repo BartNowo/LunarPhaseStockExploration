@@ -1,0 +1,19 @@
+[[source]]
+url = 'https://pypi.python.org/simple'
+verify_ssl = true
+name = 'pypi'
+
+[packages]
+pandas = "*"
+numpy="*"
+bs4 = "*"
+requests = "*"
+plotly = "*"
+polygon-api-client = "*"
+dash = "*"
+
+[dev-packages]
+pytest = "*"
+
+[requires]
+python = ">=3.8"
