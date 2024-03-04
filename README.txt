@@ -1,2 +1,11 @@
-Create virtual environment: pipenv shell
+To create virtual environment: pipenv shell
+
+Data folder contains 5 years of stock data starting from 03-06-2019 (furthest back we can go back with current polygon.io subscription) stored in csv files
+- Data includes: day open, day high, day low, day close, volume, vwap, timestamp, transactions
+Stocks/Indexes collected
+-SPY
+-NVDA
+-AAPL
+-TSLA
+-NDAQ
 
