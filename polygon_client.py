@@ -22,7 +22,6 @@ _ALLOWED_TIMESPAN = [*INTRADAY_INTERVALS,
 
 
 class StockDataClient:
-
     def __init__(self, api_key):
         self.client = RESTClient(api_key)
 
@@ -34,9 +33,7 @@ class StockDataClient:
         start_date: str,  # YYYY-MM-DD
         end_date: str = None  # YYYY-MM-DD
     ):
-        """
-        TODO: Add parameter validation
-        """
+
         # validate intervals
         if isinstance(intervals, str):
             intervals = [intervals]
