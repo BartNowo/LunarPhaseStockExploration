@@ -61,19 +61,17 @@ ax1.plot(nasdaq_dates, nasdaq_volume, label='NASDAQ')
 ax1.plot(apple_dates, apple_volume, label='Apple')
 ax1.set_xlabel('Date')
 ax1.set_ylabel('Volume (Millions)')
-ax1.set_title('Volume Data')
+ax1.set_title('Volume Data Over Time (All Stocks)')
 ax1.legend()
 
 # Format y-axis labels of the line graph as millions
 ax1.yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, pos: '{:.1f}'.format(x * 1e-8)))
 
-# Plotting the bar graph (example data)
-bar_data = [10, 20, 30, 40, 50]  # Example data for the bar graph
-bar_labels = ['A', 'B', 'C', 'D', 'E']  # Example labels for the bar graph
-ax2.bar(bar_labels, bar_data)
-ax2.set_xlabel('Category')
-ax2.set_ylabel('Value')
-ax2.set_title('Bar Graph')
+# Plotting the bar graph
+ax2.bar(moon_dates, moon_phases)
+ax2.set_xlabel('Date')
+ax2.set_ylabel('Moon Phase')
+ax2.set_title('Moon Data Over Time')
 
 # Adjust the spacing between subplots
 plt.subplots_adjust(hspace=0.5)
