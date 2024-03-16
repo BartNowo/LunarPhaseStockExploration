@@ -1,6 +1,17 @@
 # Visuals for the moon phases and the volume of each stock starting from 2019-01-01 - current date as a bar graph and line graph respectively
 # to look for a correlation between the volume of each stock to the moon phases to see if they relate to each other
 
+# Result from the data of any correlation:
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+# 
+
 import csv
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
@@ -51,30 +62,54 @@ apple_dates, apple_volume = read_volume_csv_file(apple_file)
 moon_dates, moon_phases = read_moonphase_csv_file(moon_phases_file)
 
 # Create a figure with two subplots: line graph and bar graph
-fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8, 8))
+fig, ([ax1, ax2], [ax3, ax4], [ax5, ax6]) = plt.subplots(3, 2, figsize=(8, 8))
 
-# Plotting the line graph (volume data)
-ax1.plot(tesla_dates, tesla_volume, label='Tesla')
-ax1.plot(spy_dates, spy_volume, label='S&P 500')
-ax1.plot(nvidia_dates, nvidia_volume, label='NVIDIA')
-ax1.plot(nasdaq_dates, nasdaq_volume, label='NASDAQ')
-ax1.plot(apple_dates, apple_volume, label='Apple')
+# Plotting the line graph (volume data) for Tesla stock
+ax1.plot(tesla_dates, tesla_volume, label='Tesla', linewidth=0.5)
 ax1.set_xlabel('Date')
 ax1.set_ylabel('Volume (Millions)')
-ax1.set_title('Volume Data Over Time (All Stocks)')
+ax1.set_title('Volume of Tesla Stock Over Time')
 ax1.legend()
+
+# Plotting the line graph (volume data) for S&P 500 stock
+ax2.plot(spy_dates, spy_volume, label='S&P 500', linewidth=0.5)
+ax2.set_xlabel('Date')
+ax2.set_ylabel('Volume (Millions)')
+ax2.set_title('Volume of S&P 500 Over Time')
+ax2.legend()
+
+# Plotting the line graph (volume data) for NVIDIA stock
+ax3.plot(nvidia_dates, nvidia_volume, label='NVIDIA', linewidth=0.5)
+ax3.set_xlabel('Date')
+ax3.set_ylabel('Volume (Millions)')
+ax3.set_title('Volume of NVIDIA Stock Over Time')
+ax3.legend()
+
+# Plotting the line graph (volume data) for NASDAQ stock
+ax4.plot(nasdaq_dates, nasdaq_volume, label='NASDAQ', linewidth=0.5)
+ax4.set_xlabel('Date')
+ax4.set_ylabel('Volume (Millions)')
+ax4.set_title('Volume of NASDAQ Stock Over Time')
+ax4.legend()
+
+# Plotting the line graph (volume data) for Apple stock
+ax5.plot(apple_dates, apple_volume, label='Apple', linewidth=0.5)
+ax5.set_xlabel('Date')
+ax5.set_ylabel('Volume (Millions)')
+ax5.set_title('Volume of Apple Stock Over Time')
+ax5.legend()
 
 # Format y-axis labels of the line graph as millions
 ax1.yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, pos: '{:.1f}'.format(x * 1e-8)))
 
 # Plotting the bar graph
-ax2.bar(moon_dates, moon_phases)
-ax2.set_xlabel('Date')
-ax2.set_ylabel('Moon Phase')
-ax2.set_title('Moon Data Over Time')
+ax6.bar(moon_dates, moon_phases)
+ax6.set_xlabel('Date')
+ax6.set_ylabel('Moon Phase')
+ax6.set_title('Moon Data Over Time')
 
 # Adjust the spacing between subplots
-plt.subplots_adjust(hspace=0.5)
+plt.subplots_adjust(hspace=1, wspace=0.4)
 
 # Save the figure
 plt.savefig("volume_plot.png")
