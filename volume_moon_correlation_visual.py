@@ -16,6 +16,7 @@ import csv
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from datetime import datetime
+import pandas as pd
 
 # File paths of the CSV files
 tesla_file = '../LunarPhaseStockExploration/data/tesla20190101.csv'
@@ -24,6 +25,34 @@ nvidia_file = '../LunarPhaseStockExploration/data/nvidia20190101.csv'
 nasdaq_file = '../LunarPhaseStockExploration/data/nasdaq20190101.csv'
 moon_phases_file = '../LunarPhaseStockExploration/data/moon_phases.csv'
 apple_file = '../LunarPhaseStockExploration/data/apple20190101.csv'
+
+# Read the stock data and moon data CSV files
+df_tesla = pd.read_csv(tesla_file)
+df_spy = pd.read_csv(spy_file)
+df_nvidia = pd.read_csv(nvidia_file)
+df_moon = pd.read_csv(moon_phases_file)
+df_apple = pd.read_csv(apple_file)
+
+# Extract the volume data from each stock DataFrame
+volume_apple = df_apple['volume']
+volume_tesla = df_tesla['volume']
+volume_spy = df_spy['volume']
+volume_nvidia = df_nvidia['volume']
+
+# Extract the moon phases from the moon DataFrame
+moon_phases = df_moon['Moon Phase']
+
+# Create a new DataFrame combining the volume data and moon phases
+df_combined = pd.DataFrame({
+    'Apple Volume': volume_apple,
+    'Tesla Volume': volume_tesla,
+    'SPY Volume': volume_spy,
+    'NVIDIA Volume': volume_nvidia,
+    'Moon Phase': moon_phases
+})
+
+# Print the combined DataFrame
+print(df_combined)
 
 # Function to read the contents of a CSV file for the volume data
 def read_volume_csv_file(file_path):
