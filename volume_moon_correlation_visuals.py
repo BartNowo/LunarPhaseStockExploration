@@ -90,8 +90,8 @@ nasdaq_dates, nasdaq_volume = read_volume_csv_file(nasdaq_file)
 apple_dates, apple_volume = read_volume_csv_file(apple_file)
 moon_dates, moon_phases = read_moonphase_csv_file(moon_phases_file)
 
-# Create a figure with two subplots: line graph and bar graph
-fig, ([ax1, ax2], [ax3, ax4], [ax5, ax6]) = plt.subplots(3, 2, figsize=(13, 13))
+# Create a figure with 6 subplots: lines graph and a bar graph
+fig, ([ax1, ax2, ax3], [ax4, ax5, ax6]) = plt.subplots(2, 3, figsize=(20, 20))
 
 # Plotting the line graph (volume data) for Tesla stock
 ax1.plot(tesla_dates, tesla_volume, label='Tesla', linewidth=0.5)
@@ -137,11 +137,16 @@ ax6.set_xlabel('Date')
 ax6.set_ylabel('Moon Phase')
 ax6.set_title('Moon Data Over Time')
 
+# Create a figure with 6 subplots: # some graphs not sure ...
+fig2, ([ax7, ax8, ax9], [ax10, ax11, ax12]) = plt.subplots(2, 3, figsize=(20, 20))
+
 # Adjust the spacing between subplots
-plt.subplots_adjust(hspace=1, wspace=0.4)
+plt.subplots_adjust(hspace=0.75, wspace=0.4)
+plt.subplots_adjust(hspace=0.75, wspace=0.4)
 
-# Save the figure
-plt.savefig("volume_plot.png")
+# Save the figures
+fig.savefig("volume_plot.png")
+fig2.savefig("volume_plot_2.png")
 
-# Show the figure
+# Show the figures
 plt.show()
