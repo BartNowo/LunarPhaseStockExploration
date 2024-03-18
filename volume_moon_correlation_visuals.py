@@ -17,6 +17,7 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from datetime import datetime
 import pandas as pd
+import seaborn as sns
 
 # File paths of the CSV files
 tesla_file = '../LunarPhaseStockExploration/data/tesla20190101.csv'
@@ -91,7 +92,7 @@ apple_dates, apple_volume = read_volume_csv_file(apple_file)
 moon_dates, moon_phases = read_moonphase_csv_file(moon_phases_file)
 
 # Create a figure with 6 subplots: lines graph and a bar graph
-fig, ([ax1, ax2, ax3], [ax4, ax5, ax6]) = plt.subplots(2, 3, figsize=(20, 20))
+fig, ([ax1, ax2, ax3], [ax4, ax5, ax6]) = plt.subplots(2, 3, figsize=(40, 20))
 
 # Plotting the line graph (volume data) for Tesla stock
 ax1.plot(tesla_dates, tesla_volume, label='Tesla', linewidth=0.5)
@@ -137,16 +138,16 @@ ax6.set_xlabel('Date')
 ax6.set_ylabel('Moon Phase')
 ax6.set_title('Moon Data Over Time')
 
-# Create a figure with 6 subplots: # some graphs not sure ...
+# Create a figure with 6 subplots: bargraphs with line curves and table of stats
 fig2, ([ax7, ax8, ax9], [ax10, ax11, ax12]) = plt.subplots(2, 3, figsize=(20, 20))
 
 # Adjust the spacing between subplots
-plt.subplots_adjust(hspace=0.75, wspace=0.4)
-plt.subplots_adjust(hspace=0.75, wspace=0.4)
+fig.subplots_adjust(hspace=0.2, wspace=0.2)
+fig2.subplots_adjust(hspace=0.2, wspace=0.2)
 
 # Save the figures
-fig.savefig("volume_plot.png")
-fig2.savefig("volume_plot_2.png")
+fig.savefig("volume_plots.png")
+fig2.savefig("volume_plots_2.png")
 
 # Show the figures
 plt.show()
