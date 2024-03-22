@@ -1,16 +1,17 @@
 # Visuals for the moon phases and the volume of each stock starting from 2019-01-01 - current date as a bar graph and line graph respectively
 # to look for a correlation between the volume of each stock to the moon phases to see if they relate to each other
 
-# Result from the data of any correlation:
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
-# 
+# Results from the data:
+# ----------------------
+# 1) The plots in "volume_plots.png" of the volume graphs for each stock and the moon phase over time from a general and full 5-year scope,
+#    it shows that they're consistent and are volatile in unision with barely any inconsistencies.
+# 2) The plots in "volume_plots_2.png" of the correlation between the volume vs new moon phase, volume vs full moon phase and volume vs all moon phases
+#    with the pearson's correlation coefficient as heatwave and scatterplot visuals respectively. The correlation that's within the plots are that
+#    at new moon, the volume of all stocks are negatively impacted while at full moon and against all moon phases, volume of Apple and NASDAQ stock have
+#    mostly negative correlation with a bit of neutral correlation.
+# 3) The plots in "volume_plots_3.png" of cross-correlation visuals between the stocks and the new moon, full moon and all moon phases respectively.
+#    show decreasing of volume over time.
+# 4) From the sets of graphs and visuals, it seems that it has been a landslide of volume of stocks being negatively impacted.
 
 import csv
 import matplotlib.pyplot as plt
@@ -283,7 +284,7 @@ cross_correlation_visual_all_moonphases()
 
 # Adjust the spacing between subplots
 fig.subplots_adjust(hspace=0.2, wspace=0.2)
-fig2.subplots_adjust(hspace=0.2, wspace=0.2)
+fig2.subplots_adjust(hspace=0.4, wspace=0.2)
 fig3.subplots_adjust(hspace=0.2, wspace=0.2)
 
 # Save the figures
