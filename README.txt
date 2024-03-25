@@ -9,3 +9,5 @@ Stocks/Indexes collected
 -TSLA
 -NDAQ
 
+Analysis_file folder: contains all files relevant to analysis, data collection and vizualations
+
