@@ -1,0 +1,47 @@
+ Progress Report (20 points), 5th April
+
+The progress report is a chance for you to take stock of how far you have come and to
+reflect on whether or not you are comfortable with the substance or scope of your final
+project. The format of the progress report will be a Jupyter notebook that should be
+uploaded to the private github repository you have set up for your team. It should
+Include:
+
+● Project introduction: an introduction that discusses the data and related problems
+that you are investigating.
+
+● Any changes since the proposal: a discussion whether your scope has changed
+since the check-in proposal slides. List the parts that were removed from your plan as
+well as the parts that were added newly in your plan.
+
+● Data: explain how you have prepared your data.
+
+● Exploratory data analysis: explain what your data looks like (visualizations are often
+better). Include any interesting issues or preliminary
+conclusions you have about your data.
+
+● At least five visualizations that shows an interesting hypothesis, along with an
+explanation about why you thought this was an interesting hypothesis to
+Investigate. Write the name of the member(s) who is responsible for each of them while
+explaining it.
+
+● At least two ML analyses on your dataset, along with a baseline comparison and an
+interpretation of the result that you obtain. Write the name of the member(s) who is
+responsible for it while explaining it.
+● Reflection: a discussion on the following aspects:
+
+○ What is the most challenging part of the project that you’ve encountered so far?
+○ What are your initial insights?
+○ Are there any concrete results you can show at this point? If not, why not?
+○ Going forward, what are the current biggest problems you’re facing?
+○ Do you think you are on track with your project? If not, what parts do you need to
+dedicate more time to?
+○ Given your initial exploration of the data, is it worth proceeding with your project,
+why? If not, how will you move forward (method, data etc)?
+
+● Next Step: Concrete plans and goals for the next month
+
+Need to submit:
+A PDF of your Jupyter notebook to Gradescope which includes a link to the notebook located in
+your repository (the two notebooks should look the same).
+Grading Criteria:
+The amount of progress that has been made.
