@@ -6,12 +6,12 @@ import matplotlib.pyplot as plt
 # loads in files in df and merges them and simple plotting
 
 # paths to each file
-path_to_moon_csv = Path(__file__).parent.parent / "data" / "moon_phases.csv"
-path_to_apple_csv = Path(__file__).parent.parent / "data" / "apple.csv"
-path_to_spy_csv = Path(__file__).parent.parent / "data" / "spy.csv"
-path_to_nvida_csv = Path(__file__).parent.parent / "data" / "nvidia.csv"
-path_to_tesla_csv = Path(__file__).parent.parent / "data" / "tesla.csv"
-path_to_nasdaq_csv = Path(__file__).parent.parent / "data" / "nasdaq.csv"
+path_to_moon_csv = Path(__file__).parent.parent.parent / "data" / "moon_phases.csv"
+path_to_apple_csv = Path(__file__).parent.parent.parent / "data" / "apple.csv"
+path_to_spy_csv = Path(__file__).parent.parent.parent / "data" / "spy.csv"
+path_to_nvida_csv = Path(__file__).parent.parent.parent / "data" / "nvidia.csv"
+path_to_tesla_csv = Path(__file__).parent.parent.parent / "data" / "tesla.csv"
+path_to_nasdaq_csv = Path(__file__).parent.parent.parent / "data" / "nasdaq.csv"
 
 # reads in moon data csv file loads into pandas dataframe
 moon_phases_df = pd.read_csv(path_to_moon_csv)
