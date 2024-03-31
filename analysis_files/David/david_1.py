@@ -2,39 +2,43 @@ import pandas as pd
 from pathlib import Path
 import matplotlib.pyplot as plt
 
-# this file is a good template to help you guys get started it
-# loads in files in df and merges them and simple plotting
+"""
+I would like to see how Nvidia's high share price on each full moon period from November 30, 2021 to 
+# November 29, 2022, then after that, plot the peak price of Nvidia everyday from November 30, 2022 to 
+# November 30, 2023. So essentially, I have two plots, one for the period of 11-30-2021 to 11-29-2022, and 
+# one for the latter. I am plotting peak prices. I am doing this because I am studying how NVIDIA did before and 
+# after ChatGPT was live, and seeing if full moon volatility had any effect on ChatGPT's first year of usage, since
+# everyone was going crazy over ChatGPT, and seeing if investors saw potential in NVIDIA. I am studying full moon
+# periods because many studies back that investors are most aggressive, and prices are more volatile during 
+# those times.
+"""
 
 # paths to each file
 path_to_moon_csv = Path(__file__).parent.parent.parent / "data" / "moon_phases.csv"
-path_to_apple_csv = Path(__file__).parent.parent.parent / "data" / "apple.csv"
-path_to_spy_csv = Path(__file__).parent.parent.parent / "data" / "spy.csv"
-path_to_nvida_csv = Path(__file__).parent.parent.parent / "data" / "nvidia.csv"
-path_to_tesla_csv = Path(__file__).parent.parent.parent / "data" / "tesla.csv"
-path_to_nasdaq_csv = Path(__file__).parent.parent.parent / "data" / "nasdaq.csv"
+path_to_nvidia_csv = Path(__file__).parent.parent.parent / "data" / "nvidia.csv"
 
 # reads in moon data csv file loads into pandas dataframe
 moon_phases_df = pd.read_csv(path_to_moon_csv)
 
 # reads in stock data csv file and loads into pandas dataframe
-apple_data_df = pd.read_csv(path_to_apple_csv)
+nvidia_data_df = pd.read_csv(path_to_nvidia_csv)
 
 # converts the date columns to datetime type
 moon_phases_df['Date'] = pd.to_datetime(moon_phases_df['Date']).dt.date
-apple_data_df['Date'] = pd.to_datetime(apple_data_df['timestamp']).dt.date
+nvidia_data_df['Date'] = pd.to_datetime(nvidia_data_df['timestamp']).dt.date
 
 # merges the dataframes on the data column the inner means it will include only dates
 # present in both dataframes
-merged_apple_df = pd.merge(
-    moon_phases_df, apple_data_df, on='Date', how='inner')
+merged_nvidia_df = pd.merge(
+    moon_phases_df, nvidia_data_df, on='Date', how='inner')
 
 # this is not necessary but you can save the merged df to csv file just change the
 # filename and it will create a csv file in the data folder
-# merged_apple_df.to_csv(Path(__file__).parent / "data" / "__filename.csv___", index=False)
+# merged_nvidia_df.to_csv(Path(__file__).parent / "data" / "__filename.csv___", index=False)
 
 # creates a new dataframe that filters data for one yeat from jan 1 2020 t0 dec 31 2020
-one_year_apple = merged_apple_df[(merged_apple_df['Date'] >= pd.to_datetime('2020-01-01').date()) &
-                                 (merged_apple_df['Date'] <= pd.to_datetime('2020-12-31').date())]
+one_year_apple = merged_nvidia_df[(merged_nvidia_df['Date'] >= pd.to_datetime('2020-01-01').date()) &
+                                 (merged_nvidia_df['Date'] <= pd.to_datetime('2020-12-31').date())]
 
 full_moon_dates = one_year_apple[one_year_apple['Moon Phase']
                                  == 'Full Moon']['Date']
@@ -44,7 +48,7 @@ new_moon_dates = one_year_apple[one_year_apple['Moon Phase']
 # plotting x axis date y axis closing price for that date
 plt.figure(figsize=(14, 7))
 plt.plot(one_year_apple['Date'], one_year_apple['close'],
-         label="Closing Price", color='blue')
+         label="Closing Price", color='green')
 
 # adds vlines for full moon
 for date in full_moon_dates:
@@ -57,7 +61,7 @@ for date in new_moon_dates:
                 label='New Moon' if date == new_moon_dates.iloc[0] else "")
 
 # styling and labeling
-plt.title('Stock Closing Prices with Moon Phases (2020)')
+plt.title('NVIDIA Stock Closing Prices with Moon Phases (2020)')
 plt.xlabel('Date')
 plt.ylabel('Closing Price')
 plt.xticks(rotation=45)
