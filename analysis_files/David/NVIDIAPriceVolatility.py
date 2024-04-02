@@ -36,36 +36,46 @@ merged_nvidia_df = pd.merge(
 # filename and it will create a csv file in the data folder
 # merged_nvidia_df.to_csv(Path(__file__).parent / "data" / "__filename.csv___", index=False)
 
-# creates a new dataframe that filters data for one yeat from jan 1 2020 t0 dec 31 2020
-one_year_apple = merged_nvidia_df[(merged_nvidia_df['Date'] >= pd.to_datetime('2020-01-01').date()) &
-                                 (merged_nvidia_df['Date'] <= pd.to_datetime('2020-12-31').date())]
+# Filter data for the first period (11/30/2021 to 11/29/2022)
+first_period_nvidia = merged_nvidia_df[(merged_nvidia_df['Date'] >= pd.to_datetime('2021-11-30').date()) &
+                                        (merged_nvidia_df['Date'] <= pd.to_datetime('2022-11-29').date())]
 
-full_moon_dates = one_year_apple[one_year_apple['Moon Phase']
-                                 == 'Full Moon']['Date']
-new_moon_dates = one_year_apple[one_year_apple['Moon Phase']
-                                == 'New Moon']['Date']
+# Filter data for the second period (11/30/2022 to 11/30/2023)
+second_period_nvidia = merged_nvidia_df[(merged_nvidia_df['Date'] >= pd.to_datetime('2022-11-30').date()) &
+                                         (merged_nvidia_df['Date'] <= pd.to_datetime('2023-11-30').date())]
 
-# plotting x axis date y axis closing price for that date
-plt.figure(figsize=(14, 7))
-plt.plot(one_year_apple['Date'], one_year_apple['close'],
-         label="Closing Price", color='green')
+# Get full moon dates for the first period
+full_moon_dates_first = first_period_nvidia[first_period_nvidia['Moon Phase'] == 'Full Moon']['Date']
 
-# adds vlines for full moon
-for date in full_moon_dates:
-    plt.axvline(x=date, color='red', linestyle='--', linewidth=1,
-                label='Full Moon' if date == full_moon_dates.iloc[0] else "")
+# Get peak prices at full moon days for the first period
+peak_prices_first = first_period_nvidia.groupby('Date')['close'].max().loc[full_moon_dates_first]
 
-# Add vertical lines for new moons
-for date in new_moon_dates:
-    plt.axvline(x=date, color='gray', linestyle='--', linewidth=1,
-                label='New Moon' if date == new_moon_dates.iloc[0] else "")
+# Get peak prices for everyday for the second period
+peak_prices_second = second_period_nvidia.groupby('Date')['close'].max()
 
-# styling and labeling
-plt.title('NVIDIA Stock Closing Prices with Moon Phases (2020)')
-plt.xlabel('Date')
-plt.ylabel('Closing Price')
-plt.xticks(rotation=45)
-plt.legend()
+# Create a figure with two subplots
+fig, axs = plt.subplots(2, 1, figsize=(14, 14))
+
+# Plot for the first period
+axs[0].plot(peak_prices_first.index, peak_prices_first.values, label="Peak Prices (Full Moon Period)", color='blue')
+axs[0].set_title('Peak Prices of NVIDIA Stock on Full Moon Days (11/30/2021 to 11/29/2022)')
+axs[0].set_xlabel('Date')
+axs[0].set_ylabel('Peak Price')
+axs[0].tick_params(axis='x', rotation=45)
+axs[0].legend()
+
+# Plot for the second period
+axs[1].plot(peak_prices_second.index, peak_prices_second.values, label="Peak Prices (Everyday)", color='green')
+axs[1].set_title('Peak Prices of NVIDIA Stock for Everyday (11/30/2022 to 11/30/2023)')
+axs[1].set_xlabel('Date')
+axs[1].set_ylabel('Peak Price')
+axs[1].tick_params(axis='x', rotation=45)
+axs[1].legend()
+
+# Adjust layout
 plt.tight_layout()
 
+# Show plot
 plt.show()
+
+
