@@ -84,30 +84,30 @@ for new_moon_date in first_new_moon_dates:
 
 
 cycles_df = pd.DataFrame(cycle_data)
-# print(cycles_df)
+print(cycles_df)
 avg_price_change = cycles_df['Price Change'].mean()
-# print("Average Price Change across all cycles:", avg_price_change)
+print("Average Price Change across all cycles:", avg_price_change)
 
-plt.figure(figsize=(14, 7))
-plt.plot(cycles_df['Start Date'].values, cycles_df['Start Price'].values,
-         label='Start Price', color='red')
-# plt.plot(four_year_spy['Date'], cycles_df['End Price'].values, label='Start Price', color='green')
+# plt.figure(figsize=(14, 7))
+# plt.plot(four_year_spy['Date'], cycles_df['Start Price'].values,
+#          label='Start Price', color='red')
+# # plt.plot(four_year_spy['Date'], cycles_df['End Price'].values, label='Start Price', color='green')
 
-# adds vlines for full moon
-for date in first_full_moon_dates:
-    plt.axvline(x=date, color='red', linestyle='--', linewidth=1,
-                label='Full Moon' if date == first_full_moon_dates.iloc[0] else "")
+# # adds vlines for full moon
+# for date in first_full_moon_dates:
+#     plt.axvline(x=date, color='red', linestyle='--', linewidth=1,
+#                 label='Full Moon' if date == first_full_moon_dates.iloc[0] else "")
 
-# Add vertical lines for new moons
-for date in first_new_moon_dates:
-    plt.axvline(x=date, color='gray', linestyle='--', linewidth=1,
-                label='New Moon' if date == first_new_moon_dates.iloc[0] else "")
+# # Add vertical lines for new moons
+# for date in first_new_moon_dates:
+#     plt.axvline(x=date, color='gray', linestyle='--', linewidth=1,
+#                 label='New Moon' if date == first_new_moon_dates.iloc[0] else "")
 
-plt.title('New Moon to Full moon Price Change 2020-2024')
-plt.xlabel('Date')
-plt.ylabel('Closing Price')
-plt.xticks(rotation=45)
-plt.legend()
-plt.tight_layout()
+# plt.title('New Moon to Full moon Price Change 2020-2024')
+# plt.xlabel('Date')
+# plt.ylabel('Closing Price')
+# plt.xticks(rotation=45)
+# plt.legend()
+# plt.tight_layout()
 
-plt.show()
+# plt.show()

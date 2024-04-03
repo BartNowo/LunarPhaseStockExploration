@@ -56,12 +56,14 @@ for date in new_moon_dates:
     plt.axvline(x=date, color='gray', linestyle='--', linewidth=1,
                 label='New Moon' if date == new_moon_dates.iloc[0] else "")
 
-# styling and labeling
-plt.title('Stock Closing Prices with Moon Phases (2020)')
-plt.xlabel('Date')
-plt.ylabel('Closing Price')
-plt.xticks(rotation=45)
-plt.legend()
-plt.tight_layout()
+# # styling and labeling
+# plt.title('Stock Closing Prices with Moon Phases (2020)')
+# plt.xlabel('Date')
+# plt.ylabel('Closing Price')
+# plt.xticks(rotation=45)
+# plt.legend()
+# plt.tight_layout()
 
-plt.show()
+# plt.show()
+
+print(full_moon_dates)

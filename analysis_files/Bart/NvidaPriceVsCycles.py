@@ -3,6 +3,12 @@ from pathlib import Path
 import numpy as np
 import matplotlib.pyplot as plt
 
+# This file contains starts off by reading in moon data and Nvida stock from csv and loads data into a DataFrme
+# Then we merge the two dataframes on Date and we obtain a time frame of 4 years from the merged data starting
+# at 01-01-2020 to 01-01-2024. Then we find the full moon dates and new moon dates we use a function to identify
+# the first day of the new moon (the start date for a cycle) and the first day of a full moon (end date of cycle)
+# Then we go through each cycle obtaining the price change, percent change between cycles and we find the avg % change
+
 # paths to each file
 path_to_moon_csv = Path(__file__).parent.parent.parent / \
     "data" / "moon_phases.csv"

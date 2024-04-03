@@ -11,4 +11,3 @@ Stocks/Indexes collected
 
 Analysis_file folder: contains all files relevant to analysis, data collection and vizualations
 - within this folder each of us have a folder for our relavant work to keep organized
-
