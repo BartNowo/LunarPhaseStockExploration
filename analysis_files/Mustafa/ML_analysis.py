@@ -1,12 +1,18 @@
+from pathlib import Path
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
 
+# Define paths to the datasets
+current_file_path = Path(__file__)  # Gets the path of the current script
+path_to_moon_csv = current_file_path.parent.parent.parent / "data" / "moon_phases.csv"
+path_to_apple_csv = current_file_path.parent.parent.parent / "data" / "apple.csv"
+
 # Step 1: Read and preprocess the datasets
-moon_phases = pd.read_csv("moon_phases.csv")
-apple_data = pd.read_csv("apple.csv")
+moon_phases = pd.read_csv(path_to_moon_csv)
+apple_data = pd.read_csv(path_to_apple_csv)
 
 # Convert timestamp columns to datetime format
 moon_phases['Date'] = pd.to_datetime(moon_phases['Date'])
