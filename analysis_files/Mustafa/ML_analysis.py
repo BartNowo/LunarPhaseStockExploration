@@ -3,6 +3,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
+import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Define paths to the datasets
@@ -53,4 +54,32 @@ feature_importances.nlargest(5).plot(kind='barh')
 plt.xlabel('Feature Importance')
 plt.ylabel('Feature')
 plt.title('Top 5 Feature Importances')
+plt.show()
+
+
+
+# Aggregate Stock Price Movements by Moon Phase
+avg_prices_by_phase = merged_data.groupby('Moon Phase')['close'].mean().reset_index()
+
+# Visualize Stock Performance by Moon Phase
+plt.figure(figsize=(10, 6))
+sns.barplot(x='Moon Phase', y='close', data=avg_prices_by_phase.sort_values(by='close', ascending=False))
+plt.xticks(rotation=45)
+plt.title('Average Closing Price by Moon Phase')
+plt.ylabel('Average Closing Price ($)')
+plt.xlabel('Moon Phase')
+plt.tight_layout()
+plt.show()
+
+# For a more detailed analysis, consider the difference between opening and closing prices
+merged_data['price_change'] = merged_data['close'] - merged_data['open']
+avg_price_change_by_phase = merged_data.groupby('Moon Phase')['price_change'].mean().reset_index()
+
+plt.figure(figsize=(10, 6))
+sns.barplot(x='Moon Phase', y='price_change', data=avg_price_change_by_phase.sort_values(by='price_change', ascending=False))
+plt.xticks(rotation=45)
+plt.title('Average Daily Price Change by Moon Phase')
+plt.ylabel('Average Price Change ($)')
+plt.xlabel('Moon Phase')
+plt.tight_layout()
 plt.show()
