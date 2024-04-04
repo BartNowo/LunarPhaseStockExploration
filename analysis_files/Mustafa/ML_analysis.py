@@ -54,7 +54,7 @@ feature_importances_ml.nlargest(5).plot(kind='barh')
 plt.xlabel('Feature Importance')
 plt.ylabel('Feature')
 plt.title('Top 5 Feature Importances for ML Model')
-plt.show()
+plt.tight_layout()
 
 # Step 7: Read and preprocess the datasets for analysis of stock performance by moon phase
 # Read moon phases data again
@@ -77,7 +77,7 @@ merged_data_analysis['hour'] = merged_data_analysis['timestamp'].dt.hour
 # Calculate average closing price for each moon phase
 avg_prices_by_phase = merged_data_analysis.groupby('Moon Phase')['close'].mean().reset_index()
 
-# Visualize Average Closing Price by Moon Phase
+# Visualize Average Closing Price by Moon Phase (Bar Chart)
 plt.figure(figsize=(10, 6))
 sns.barplot(x='Moon Phase', y='close', data=avg_prices_by_phase.sort_values(by='close', ascending=False))
 plt.xticks(rotation=45)
@@ -91,12 +91,39 @@ plt.show()
 merged_data_analysis['price_change'] = merged_data_analysis['close'] - merged_data_analysis['open']
 avg_price_change_by_phase = merged_data_analysis.groupby('Moon Phase')['price_change'].mean().reset_index()
 
-# Visualize Average Daily Price Change by Moon Phase
+# Visualize Average Daily Price Change by Moon Phase (Column Chart)
 plt.figure(figsize=(10, 6))
 sns.barplot(x='Moon Phase', y='price_change', data=avg_price_change_by_phase.sort_values(by='price_change', ascending=False))
 plt.xticks(rotation=45)
 plt.title('Average Daily Price Change by Moon Phase')
 plt.ylabel('Average Price Change ($)')
 plt.xlabel('Moon Phase')
+plt.tight_layout()
+plt.show()
+
+# Visualize distribution of the price change (Histogram)
+plt.figure(figsize=(10, 6))
+sns.histplot(merged_data_analysis['price_change'], bins=20)
+plt.title('Distribution of Price Change')
+plt.xlabel('Price Change ($)')
+plt.ylabel('Frequency')
+plt.tight_layout()
+plt.show()
+
+# Visualize line chart for average closing price by moon phase
+plt.figure(figsize=(10, 6))
+sns.lineplot(x='Moon Phase', y='close', data=avg_prices_by_phase.sort_values(by='close', ascending=False), marker='o')
+plt.xticks(rotation=45)
+plt.title('Average Closing Price by Moon Phase')
+plt.ylabel('Average Closing Price ($)')
+plt.xlabel('Moon Phase')
+plt.tight_layout()
+plt.show()
+
+# Visualize pie chart for distribution of moon phases
+plt.figure(figsize=(8, 8))
+moon_phase_counts = merged_data_analysis['Moon Phase'].value_counts()
+plt.pie(moon_phase_counts, labels=moon_phase_counts.index, autopct='%1.1f%%', startangle=140)
+plt.title('Distribution of Moon Phases')
 plt.tight_layout()
 plt.show()
