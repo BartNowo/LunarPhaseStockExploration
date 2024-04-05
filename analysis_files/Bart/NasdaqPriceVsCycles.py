@@ -2,6 +2,8 @@ import pandas as pd
 from pathlib import Path
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+from matplotlib.dates import DateFormatter
 
 # This file contains starts off by reading in moon data and Nasdaq stock from csv and loads data into a DataFrme
 # Then we merge the two dataframes on Date and we obtain a time frame of 4 years from the merged data starting
@@ -32,8 +34,8 @@ merged_nasdaq_df = pd.merge(
     moon_phases_df, nasdaq_data_df, on='Date', how='inner')
 
 # creates a new dataframe that filters data for one yeat from jan 1 2020 t0 dec 31 2020
-one_year_nasdaq = merged_nasdaq_df[(merged_nasdaq_df['Date'] >= pd.to_datetime('2023-01-01').date()) &
-                                   (merged_nasdaq_df['Date'] <= pd.to_datetime('2023-12-31').date())]
+one_year_nasdaq = merged_nasdaq_df[(merged_nasdaq_df['Date'] >= pd.to_datetime('2020-01-01').date()) &
+                                   (merged_nasdaq_df['Date'] <= pd.to_datetime('2024-01-01').date())]
 
 full_moon_dates = one_year_nasdaq[one_year_nasdaq['Moon Phase']
                                   == 'Full Moon']['Date']
@@ -86,31 +88,64 @@ for new_moon_date in first_new_moon_dates:
 
 
 cycles_df = pd.DataFrame(cycle_data)
+# calculates the return for each cycle
+cycles_df['Return'] = 1000 * (cycles_df['Percent Change'] / 100)
+# Calculate the total outcome by summing the returns, then subtract the total initial investment
+# to find the net profit (or loss).
+total_return = cycles_df['Return'].sum()
+
+
 print(cycles_df)
 avg_price_change = cycles_df['Price Change'].mean()
 print("Average Price Change across all cycles:", avg_price_change)
+# Count of cycles with positive price change
+positive_change_count = (cycles_df['Price Change'] > 0).sum()
+
+# Count of cycles with negative price change
+negative_change_count = (cycles_df['Price Change'] < 0).sum()
+
+# Total number of cycles analyzed
+total_cycles = cycles_df.shape[0]
+
+# Output the counts
+print(
+    f"Number of cycles with a positive price change: {positive_change_count}")
+print(
+    f"Number of cycles with a negative price change: {negative_change_count}")
+print(f"Total number of cycles analyzed: {total_cycles}")
+print(
+    f"Percent of the time buying on the new moon and selling on the full moon would produce gains: {positive_change_count / total_cycles}")
 
 
-plt.figure(figsize=(14, 7))
-plt.plot(cycles_df['Start Date'].values, cycles_df['Start Price'].values,
-         label='Start Price', color='red')
-# plt.plot(four_year_spy['Date'], cycles_df['End Price'].values, label='Start Price', color='green')
+print(f"Total return after all cycles: ${total_return:.2f}")
 
-# adds vlines for full moon
-for date in first_full_moon_dates:
-    plt.axvline(x=date, color='red', linestyle='--', linewidth=1,
-                label='Full Moon' if date == first_full_moon_dates.iloc[0] else "")
 
-# Add vertical lines for new moons
-for date in first_new_moon_dates:
-    plt.axvline(x=date, color='gray', linestyle='--', linewidth=1,
-                label='New Moon' if date == first_new_moon_dates.iloc[0] else "")
+fig, ax = plt.subplots(figsize=(10, 6))
 
-plt.title('New Moon to Full moon Price Change 2023')
-plt.xlabel('Date')
-plt.ylabel('Closing Price')
+# Plot each cycle with color coding for price direction
+for _, row in cycles_df.iterrows():
+    color = 'green' if row['Price Change'] > 0 else 'red'
+    # Plot a line from the start to the end of the cycle with color based on price change
+    plt.plot([row['Start Date'], row['End Date']], [row['Start Price'], row['End Price']], '-o',
+             color=color, label=f"{row['Start Date']} to {row['End Date']}")
+
+# Improve readability by rotating date labels
 plt.xticks(rotation=45)
-plt.legend()
-plt.tight_layout()
 
+# Set the date format on the x-axis to make it clearer
+ax.xaxis.set_major_formatter(DateFormatter("%Y-%m-%d"))
+
+# Set titles and labels
+plt.title('Stock Price Change from New Moon to Full Moon')
+plt.xlabel('Date')
+plt.ylabel('Stock Price')
+
+# Optional: Adjust the x-axis to display dates better, especially if they are too dense
+ax.xaxis.set_major_locator(mdates.MonthLocator(
+    interval=1))  # Adjust the interval as needed
+
+# Since we're using color to denote price change, a legend showing each cycle might not be necessary and can clutter the plot.
+# Consider custom legends or annotations if specific cycles need highlighting.
+
+plt.tight_layout()
 plt.show()
