@@ -94,6 +94,8 @@ total_return = cycles_df['Return'].sum()
 
 
 print(cycles_df)
+# cycles_df.to_csv(Path(__file__).parent.parent.parent /"data" / "spy_df.csv", index=False)
+
 avg_price_change = cycles_df['Price Change'].mean()
 print("Average Price Change across all cycles:", avg_price_change)
 # Count of cycles with positive price change

@@ -88,7 +88,12 @@ for new_moon_date in first_new_moon_dates:
 
 
 cycles_df = pd.DataFrame(cycle_data)
+
+
+cycles_df['Return'] = 1000 * (cycles_df['Percent Change'] / 100)
+total_return = cycles_df['Return'].sum()
 print(cycles_df)
+# cycles_df.to_csv(Path(__file__).parent.parent.parent /"data" / "nvidia_df.csv", index=False)
 avg_price_change = cycles_df['Price Change'].mean()
 print("Average Price Change across all cycles:", avg_price_change)
 # Count of cycles with positive price change
@@ -108,7 +113,7 @@ print(
 print(f"Total number of cycles analyzed: {total_cycles}")
 print(
     f"Percent of the time buying on the new moon and selling on the full moon would produce gains: {positive_change_count / total_cycles}")
-
+print(f"Total return after all cycles: ${total_return:.2f}")
 fig, ax = plt.subplots(figsize=(10, 6))
 
 # Plot each cycle with color coding for price direction
