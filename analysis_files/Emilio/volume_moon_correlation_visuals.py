@@ -23,6 +23,7 @@ from pandas.plotting import register_matplotlib_converters
 from pathlib import Path
 import statsmodels.api as sm
 import scipy.stats as stats
+import numpy as np
 
 # File paths of the CSV files
 tesla_file = Path(__file__).parent.parent.parent / "data" / "tesla.csv"
@@ -160,34 +161,6 @@ moon_phase_graph()
 # Create a figure with 6 subplots: heatwaves and scatterplot visuals
 fig2, ([ax7, ax8, ax9], [ax10, ax11, ax12]) = plt.subplots(2, 3, figsize=(20, 20))
 
-def pearson_coorelation_visual_new_moon_heatwave(): # Visualize the correlation between the new moon phase and all stocks with the heatwave visual of Pearson's correlation coefficent
-    new_moon_data = df_combined[df_combined['Moon Phase'] == 'New Moon'] # Filter the combined DataFrame for the new moon phase
-    new_moon_data = new_moon_data.dropna(subset=['Apple Volume', 'NASDAQ Volume', 'NVIDIA Volume', 'SPY Volume', 'Tesla Volume'])
-    correlation_matrix_pearson = new_moon_data[['Apple Volume', 'NASDAQ Volume', 'NVIDIA Volume', 'SPY Volume', 'Tesla Volume']].corr(method='pearson') # Calculate the correlation matrix for the new moon phase using Pearson's correlation coefficient
-    sns.heatmap(correlation_matrix_pearson, annot=True, cmap='coolwarm', ax=ax7) # Plot the correlation matrix as a heatmap
-    ax7.set_title("Pearson Correlation: Volume vs New Moon")
-pearson_coorelation_visual_new_moon_heatwave()
-
-def pearson_coorelation_visual_full_moon_heatwave(): # Visualize the correlation between the full moon phase and all stocks with the heatwave visual of Pearson's correlation coefficent
-    full_moon_data = df_combined[df_combined['Moon Phase'] == 'Full Moon'] # Filter the combined DataFrame for the new moon phase
-    full_moon_data = full_moon_data.dropna(subset=['Apple Volume', 'NASDAQ Volume', 'NVIDIA Volume', 'SPY Volume', 'Tesla Volume'])
-    correlation_matrix_pearson = full_moon_data[['Apple Volume', 'NASDAQ Volume', 'NVIDIA Volume', 'SPY Volume', 'Tesla Volume']].corr(method='pearson') # Calculate the correlation matrix for the new moon phase using Pearson's correlation coefficient
-    sns.heatmap(correlation_matrix_pearson, annot=True, cmap='coolwarm', ax=ax8) # Plot the correlation matrix as a heatmap, red color -> positive correlation, white color -> neutral correlation and blue color -> negative correlation
-    ax8.set_title("Pearson Correlation: Volume vs Full Moon")
-pearson_coorelation_visual_full_moon_heatwave()
-
-def pearson_correlation_visual_all_moonphases_heatwave(): # Visualize the correlation between all moon phases and all stocks with the heatwave visual of Pearson's correlation coefficent
-    # Filter the combined DataFrame for the desired moon phases
-    moon_phases_filter = ['New Moon', 'Waxing Crescent Moon', 'First Quarter Moon', 'Waxing Gibbous Moon', 'Full Moon', 'Waning Gibbous Moon', 'Last Quarter Moon', 'Waning Crescent Moon']
-    filtered_data = df_combined[df_combined['Moon Phase'].isin(moon_phases_filter)]
-    filtered_data = filtered_data.dropna(subset=['Apple Volume', 'NASDAQ Volume', 'NVIDIA Volume', 'SPY Volume', 'Tesla Volume'])
-    correlation_matrix_pearson = filtered_data[['Apple Volume', 'NASDAQ Volume', 'NVIDIA Volume', 'SPY Volume', 'Tesla Volume']].corr(method='pearson') # Calculate the correlation matrix for the new moon phase using Pearson's correlation coefficient
-    sns.heatmap(correlation_matrix_pearson, annot=True, cmap='coolwarm', ax=ax9) # Plot the correlation matrix as a heatmap, red color -> positive correlation, white color -> neutral correlation and blue color -> negative correlation
-    ax9.set_title("Pearson Correlation: Volume vs All Moon Phases")
-pearson_correlation_visual_all_moonphases_heatwave()
-
-register_matplotlib_converters()
-
 def cross_correlation_visual_new_moon(): # Visualize the correlation between the new moon phase and all stocks with the cross-correlation graph
     def crosscorr(data1, data2, lag=0): # Function to calculate cross-correlation between two time series
         return data1.corr(data2.shift(lag))
@@ -200,12 +173,12 @@ def cross_correlation_visual_new_moon(): # Visualize the correlation between the
         cross_corr[column] = [crosscorr(new_moon_phase[column], df_combined[column], lag) for lag in lags]
     # Plot cross-correlation as a line graph
     for column, values in cross_corr.items():
-        ax10.plot(lags, values, label=column)
-    ax10.axhline(0, color='black', linestyle='--')
-    ax10.set_xlabel('Lag')
-    ax10.set_ylabel('Correlation')
-    ax10.set_title('Cross-Correlation: Volume vs New Moon Phase')
-    ax10.legend()
+        ax7.plot(lags, values, label=column)
+    ax7.axhline(0, color='black', linestyle='--')
+    ax7.set_xlabel('Lag')
+    ax7.set_ylabel('Correlation')
+    ax7.set_title('Cross-Correlation: Volume vs New Moon Phase')
+    ax7.legend()
 cross_correlation_visual_new_moon()
 
 def cross_correlation_visual_full_moon(): # Visualize the correlation between the full moon phase and all stocks with the cross-correlation graph
@@ -220,12 +193,12 @@ def cross_correlation_visual_full_moon(): # Visualize the correlation between th
         cross_corr[column] = [crosscorr(full_moon_phase[column], df_combined[column], lag) for lag in lags]
     # Plot cross-correlation as a line graph
     for column, values in cross_corr.items():
-        ax11.plot(lags, values, label=column)
-    ax11.axhline(0, color='black', linestyle='--')
-    ax11.set_xlabel('Lag')
-    ax11.set_ylabel('Correlation')
-    ax11.set_title('Cross-Correlation: Volume vs Full Moon Phase')
-    ax11.legend()
+        ax8.plot(lags, values, label=column)
+    ax8.axhline(0, color='black', linestyle='--')
+    ax8.set_xlabel('Lag')
+    ax8.set_ylabel('Correlation')
+    ax8.set_title('Cross-Correlation: Volume vs Full Moon Phase')
+    ax8.legend()
 cross_correlation_visual_full_moon()
 
 def cross_correlation_visual_all_moonphases(): # Visualize the correlation between all moon phases and all stocks with the cross-correlation graph
@@ -242,12 +215,12 @@ def cross_correlation_visual_all_moonphases(): # Visualize the correlation betwe
         cross_corr[column] = [crosscorr(filtered_data[column], df_combined[column], lag) for lag in lags]
     # Plot cross-correlation as a line graph
     for column, values in cross_corr.items():
-        ax12.plot(lags, values, label=column)
-    ax12.axhline(0, color='black', linestyle='--')
-    ax12.set_xlabel('Lag')
-    ax12.set_ylabel('Correlation')
-    ax12.set_title('Cross-Correlation: Volume vs All Moon Phases')
-    ax12.legend()
+        ax9.plot(lags, values, label=column)
+    ax9.axhline(0, color='black', linestyle='--')
+    ax9.set_xlabel('Lag')
+    ax9.set_ylabel('Correlation')
+    ax9.set_title('Cross-Correlation: Volume vs All Moon Phases')
+    ax9.legend()
 cross_correlation_visual_all_moonphases()
 
 # Create a figure with 6 subplots: cross-correlation plots and ...
@@ -261,7 +234,6 @@ fig2.subplots_adjust(hspace=0.4, wspace=0.2)
 # Save the figures
 # fig.savefig("volume_plots.png")
 fig2.savefig("volume_plots_2.png")
-# fig3.savefig("volume_plots_3.png")
 
 # Show the figures
 plt.show()
