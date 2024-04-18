@@ -224,16 +224,36 @@ def cross_correlation_visual_all_moonphases(): # Visualize the correlation betwe
 cross_correlation_visual_all_moonphases()
 
 # Create a figure with 6 subplots: cross-correlation plots and ...
-# fig3, ([ax13, ax14, ax15], [ax16, ax17, ax18]) = plt.subplots(2, 3, figsize=(20, 20))
+fig3, ([ax13, ax14, ax15], [ax16, ax17, ax18]) = plt.subplots(2, 3, figsize=(20, 20))
+
+def average_daily_stock_volume_moon_phase():
+    moon_phases_filter = ['New Moon', 'Waxing Crescent Moon', 'First Quarter Moon', 'Waxing Gibbous Moon', 'Full Moon', 'Waning Gibbous Moon', 'Last Quarter Moon', 'Waning Crescent Moon']
+    filtered_data = df_combined[df_combined['Moon Phase'].isin(moon_phases_filter)]
+    filtered_data = filtered_data.dropna(subset=['Apple Volume', 'NASDAQ Volume', 'NVIDIA Volume', 'SPY Volume', 'Tesla Volume'])
+    # Calculate the average daily value of stock volume for each stock
+    average_volume_apple = filtered_data['Apple Volume'].mean()
+    average_volume_nasdaq = filtered_data['NASDAQ Volume'].mean()
+    average_volume_nvidia = filtered_data['NVIDIA Volume'].mean()
+    average_volume_spy = filtered_data['SPY Volume'].mean()
+    average_volume_tesla = filtered_data['Tesla Volume'].mean()
+    # Create a bar graph of the average daily volume for each stock
+    stocks = ['Apple', 'NASDAQ', 'NVIDIA', 'SPY', 'Tesla']
+    average_volumes = [average_volume_apple, average_volume_nasdaq, average_volume_nvidia, average_volume_spy, average_volume_tesla]
+    ax13.bar(stocks, average_volumes)
+    ax13.set_xlabel('Stock')
+    ax13.set_ylabel('Average Daily Volume (Billions)')
+    ax13.set_title('Average Daily Stock Volume by Stock')
+average_daily_stock_volume_moon_phase()
 
 # Adjust the spacing between subplots
 fig.subplots_adjust(hspace=0.2, wspace=0.2)
 fig2.subplots_adjust(hspace=0.4, wspace=0.2)
-# fig3.subplots_adjust(hspace=0.2, wspace=0.2)
+fig3.subplots_adjust(hspace=0.2, wspace=0.2)
 
 # Save the figures
-# fig.savefig("volume_plots.png")
-fig2.savefig("volume_plots_2.png")
+# fig.savefig("emilio_plots.png")
+fig2.savefig("emilio_plots_2.png")
+fig3.savefig("emilio_plots_3.png")
 
 # Show the figures
 plt.show()
