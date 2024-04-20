@@ -1,18 +1,6 @@
 # Visuals for the moon phases and the volume of each stock starting from 2019-01-01 - current date as a bar graph and line graph respectively
 # to look for a correlation between the volume of each stock to the moon phases to see if they relate to each other
 
-# Results from the data:
-# ----------------------
-# 1) The plots in "volume_plots.png" of the volume graphs for each stock and the moon phase over time from a general and full 5-year scope,
-#    it shows that they're consistent and are volatile in unision with barely any inconsistencies.
-# 2) The plots in "volume_plots_2.png" of the correlation between the volume vs new moon phase, volume vs full moon phase and volume vs all moon phases
-#    with the pearson's correlation coefficient as heatwave and scatterplot visuals respectively. The correlation that's within the plots are that
-#    at new moon, the volume of all stocks are negatively impacted while at full moon and against all moon phases, volume of Apple and NASDAQ stock have
-#    mostly negative correlation with a bit of neutral correlation.
-# 3) The plots in "volume_plots_3.png" of cross-correlation visuals between the stocks and the new moon, full moon and all moon phases respectively.
-#    show decreasing of volume over time.
-# 4) From the sets of graphs and visuals, it seems that it has been a landslide of volume of stocks being negatively impacted.
-
 import csv
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
@@ -104,52 +92,89 @@ moon_dates, moon_phases = read_moonphase_csv_file(moon_phases_file)
 fig, ([ax1, ax2, ax3], [ax4, ax5, ax6]) = plt.subplots(2, 3, figsize=(40, 20))
 
 def volume_tesla_graph(): # Plotting the line graph (volume data) for Tesla stock
+    # Plotting the line graph (volume data) for Tesla stock
     ax1.plot(tesla_dates, tesla_volume, label='Tesla', linewidth=0.5)
     ax1.set_xlabel('Date')
     ax1.set_ylabel('Volume (Millions)')
     ax1.set_title('Volume of Tesla Stock Over Time')
-    ax1.legend()
+    # Set y-axis limits
+    ax1.set_ylim(0, 1000000000)
+    # Set y-axis ticks
+    num_ticks = 5
+    tick_values = [tick * 200000000 for tick in range(num_ticks + 1)]
+    ax1.set_yticks(tick_values)
+    # Format y-axis tick labels
+    tick_labels = [f'{tick // 1000000}M' for tick in tick_values]
+    ax1.set_yticklabels(tick_labels)
 volume_tesla_graph()
 
-def volume_sp500_graph(): # Plotting the line graph (volume data) for S&P 500 stock
-    ax2.plot(spy_dates, spy_volume, label='S&P 500', linewidth=0.5)
+def volume_spy_graph(): # Plotting the line graph (volume data) for SPY stock
+    # Plotting the line graph (volume data) for SPY stock
+    ax2.plot(spy_dates, spy_volume, label='SPY', linewidth=0.5)
     ax2.set_xlabel('Date')
     ax2.set_ylabel('Volume (Millions)')
-    ax2.set_title('Volume of S&P 500 Over Time')
-    ax2.legend()
-volume_sp500_graph()
+    ax2.set_title('Volume of SPY Over Time')
+    # Set y-axis limits
+    ax2.set_ylim(0, 400000000)
+    # Set y-axis ticks
+    num_ticks = 5
+    tick_values = [tick * 80000000 for tick in range(num_ticks + 1)]
+    ax2.set_yticks(tick_values)
+    # Format y-axis tick labels
+    tick_labels = [f'{tick // 1000000}M' for tick in tick_values]
+    ax2.set_yticklabels(tick_labels)
+volume_spy_graph()
 
 def volume_nvidia_graph(): # Plotting the line graph (volume data) for NVIDIA stock
+    # Plotting the line graph (volume data) for NVIDIA stock
     ax3.plot(nvidia_dates, nvidia_volume, label='NVIDIA', linewidth=0.5)
     ax3.set_xlabel('Date')
     ax3.set_ylabel('Volume (Millions)')
     ax3.set_title('Volume of NVIDIA Stock Over Time')
-    ax3.legend()
+    # Set y-axis limits
+    ax3.set_ylim(0, 160000000)
+    # Set y-axis ticks
+    num_ticks = 5
+    tick_values = [tick * 32000000 for tick in range(num_ticks + 1)]
+    ax3.set_yticks(tick_values)
+    # Format y-axis tick labels
+    tick_labels = [f'{tick // 1000000}M' for tick in tick_values]
+    ax3.set_yticklabels(tick_labels)
 volume_nvidia_graph()
 
 def volume_nasdaq_graph(): # Plotting the line graph (volume data) for NASDAQ stock
+    # Plotting the line graph (volume data) for NASDAQ stock
     ax4.plot(nasdaq_dates, nasdaq_volume, label='NASDAQ', linewidth=0.5)
     ax4.set_xlabel('Date')
     ax4.set_ylabel('Volume (Millions)')
     ax4.set_title('Volume of NASDAQ Stock Over Time')
-    ax4.legend()
+    # Set y-axis limits
+    ax4.set_ylim(0, 18000000)
+    # Set y-axis ticks
+    num_ticks = 5
+    tick_values = [tick * 3600000 for tick in range(num_ticks + 1)]
+    ax4.set_yticks(tick_values)
+    # Format y-axis tick labels
+    tick_labels = [f'{tick // 1000000}M' for tick in tick_values]
+    ax4.set_yticklabels(tick_labels)
 volume_nasdaq_graph()
 
 def volume_apple_graph(): # Plotting the line graph (volume data) for Apple stock
+    # Plotting the line graph (volume data) for Apple stock
     ax5.plot(apple_dates, apple_volume, label='Apple', linewidth=0.5)
     ax5.set_xlabel('Date')
     ax5.set_ylabel('Volume (Millions)')
     ax5.set_title('Volume of Apple Stock Over Time')
-    ax5.legend()
+    # Set y-axis limits
+    ax5.set_ylim(0, 410000000)
+    # Set y-axis ticks
+    num_ticks = 5
+    tick_values = [tick * 82000000 for tick in range(num_ticks + 1)]
+    ax5.set_yticks(tick_values)
+    # Format y-axis tick labels
+    tick_labels = [f'{tick // 1000000}M' for tick in tick_values]
+    ax5.set_yticklabels(tick_labels)
 volume_apple_graph()
-
-def format_y_axis_labels(): # Format y-axis labels of the line graph as millions
-    ax1.yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, pos: '{:.1f}'.format(x * 1e-8)))
-    ax2.yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, pos: '{:.1f}'.format(x * 1e-8)))
-    ax3.yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, pos: '{:.1f}'.format(x * 1e-8)))
-    ax4.yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, pos: '{:.1f}'.format(x * 1e-8)))
-    ax5.yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, pos: '{:.1f}'.format(x * 1e-8)))
-format_y_axis_labels()
 
 def moon_phase_graph(): # Plotting the bar graph
     ax6.bar(moon_dates, moon_phases)
@@ -223,10 +248,7 @@ def cross_correlation_visual_all_moonphases(): # Visualize the correlation betwe
     ax9.legend()
 cross_correlation_visual_all_moonphases()
 
-# Create a figure with 6 subplots: cross-correlation plots and ...
-fig3, ([ax13, ax14, ax15], [ax16, ax17, ax18]) = plt.subplots(2, 3, figsize=(20, 20))
-
-def average_daily_stock_volume_moon_phase():
+def average_daily_stock_volume_change_percentage_moon_phase():
     moon_phases_filter = ['New Moon', 'Waxing Crescent Moon', 'First Quarter Moon', 'Waxing Gibbous Moon', 'Full Moon', 'Waning Gibbous Moon', 'Last Quarter Moon', 'Waning Crescent Moon']
     filtered_data = df_combined[df_combined['Moon Phase'].isin(moon_phases_filter)]
     filtered_data = filtered_data.dropna(subset=['Apple Volume', 'NASDAQ Volume', 'NVIDIA Volume', 'SPY Volume', 'Tesla Volume'])
@@ -236,24 +258,78 @@ def average_daily_stock_volume_moon_phase():
     average_volume_nvidia = filtered_data['NVIDIA Volume'].mean()
     average_volume_spy = filtered_data['SPY Volume'].mean()
     average_volume_tesla = filtered_data['Tesla Volume'].mean()
-    # Create a bar graph of the average daily volume for each stock
+    # Calculate the volume change percentage for each stock
+    initial_volumes = [filtered_data['Apple Volume'].iloc[0], filtered_data['NASDAQ Volume'].iloc[0], filtered_data['NVIDIA Volume'].iloc[0], filtered_data['SPY Volume'].iloc[0], filtered_data['Tesla Volume'].iloc[0]]
+    volume_changes = [(average_volume_apple - initial_volumes[0]) / initial_volumes[0] * 100,
+                      (average_volume_nasdaq - initial_volumes[1]) / initial_volumes[1] * 100,
+                      (average_volume_nvidia - initial_volumes[2]) / initial_volumes[2] * 100,
+                      (average_volume_spy - initial_volumes[3]) / initial_volumes[3] * 100,
+                      (average_volume_tesla - initial_volumes[4]) / initial_volumes[4] * 100]
+    # Create a bar graph of the average daily volume change percentage for each stock
     stocks = ['Apple', 'NASDAQ', 'NVIDIA', 'SPY', 'Tesla']
-    average_volumes = [average_volume_apple, average_volume_nasdaq, average_volume_nvidia, average_volume_spy, average_volume_tesla]
-    ax13.bar(stocks, average_volumes)
-    ax13.set_xlabel('Stock')
-    ax13.set_ylabel('Average Daily Volume (Billions)')
-    ax13.set_title('Average Daily Stock Volume by Stock')
-average_daily_stock_volume_moon_phase()
+    ax10.bar(stocks, volume_changes)
+    ax10.set_xlabel('Stock')
+    ax10.set_ylabel('Average Daily Volume Change (%)')
+    ax10.set_title('Average Daily Stock Volume Change (%) by Stock')
+average_daily_stock_volume_change_percentage_moon_phase()
+
+# Create a figure with 6 subplots: cross-correlation plots and ...
+fig3, ([ax13, ax14], [ax15, ax16], [ax17, ax18]) = plt.subplots(3, 2, figsize=(20, 20))
+
+def distribution_of_apple_volume_on_new_moon():
+    print("not done yet...")
+distribution_of_apple_volume_on_new_moon()
+
+def distribution_of_apple_volume_on_full_moon():
+    print("not done yet...")
+distribution_of_apple_volume_on_full_moon()
+
+def distribution_of_nasdaq_volume_on_new_moon():
+    print("not done yet...")
+distribution_of_nasdaq_volume_on_new_moon()
+
+def distribution_of_nasdaq_volume_on_full_moon():
+    print("not done yet...")
+distribution_of_nasdaq_volume_on_full_moon()
+
+def distribution_of_nvidia_volume_on_new_moon():
+    print("not done yet...")
+distribution_of_nvidia_volume_on_new_moon()
+
+def distribution_of_nvidia_volume_on_full_moon():
+    print("not done yet...")
+distribution_of_nvidia_volume_on_full_moon()
+
+# Create a figure with 6 subplots: cross-correlation plots and ...
+fig4, ([ax19, ax20],[ax21, ax22], [ax23, ax24]) = plt.subplots(3, 2, figsize=(20, 20))
+
+def distribution_of_spy_volume_on_new_moon():
+    print("not done yet...")
+distribution_of_spy_volume_on_new_moon()
+
+def distribution_of_spy_volume_on_full_moon():
+    print("not done yet...")
+distribution_of_spy_volume_on_full_moon()
+
+def distribution_of_tesla_volume_on_new_moon():
+    print("not done yet...")
+distribution_of_tesla_volume_on_new_moon()
+
+def distribution_of_tesla_volume_on_full_moon():
+    print("not done yet...")
+distribution_of_tesla_volume_on_full_moon()
 
 # Adjust the spacing between subplots
 fig.subplots_adjust(hspace=0.2, wspace=0.2)
 fig2.subplots_adjust(hspace=0.4, wspace=0.2)
 fig3.subplots_adjust(hspace=0.2, wspace=0.2)
+fig4.subplots_adjust(hspace=0.2, wspace=0.2)
 
 # Save the figures
-# fig.savefig("emilio_plots.png")
-fig2.savefig("emilio_plots_2.png")
-fig3.savefig("emilio_plots_3.png")
+fig.savefig("emilio_plots.png")
+# fig2.savefig("emilio_plots_2.png")
+# fig3.savefig("emilio_plots_3.png")
+# fig4.savefig("emilio_plots_4.png")
 
 # Show the figures
 plt.show()
