@@ -100,7 +100,7 @@ apple_dates, apple_volume = read_volume_csv_file(apple_file)
 moon_dates, moon_phases = read_moonphase_csv_file(moon_phases_file)
 
 # Create a figure with 6 subplots: cross-correlation line graphs and a bar graph
-fig, ([ax1, ax2, ax3], [ax4, ax5, ax6]) = plt.subplots(2, 3, figsize=(40, 20))
+fig, ([ax1, ax2, ax3], [ax4, ax5, ax6]) = plt.subplots(2, 3, figsize=(20, 10))
 
 def volume_tesla_graph(): # Plotting the line graph (volume data) for Tesla stock
     # Plotting the line graph (volume data) for Tesla stock
