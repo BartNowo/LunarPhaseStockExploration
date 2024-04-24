@@ -31,6 +31,13 @@ volume_spy = df_spy['volume']
 volume_nvidia = df_nvidia['volume']
 volume_nasdaq = df_nasdaq['volume']
 
+# Extract the VWAP data from each stock DataFrame
+vwap_apple = df_apple['vwap']
+vwap_tesla = df_tesla['vwap']
+vwap_spy = df_spy['vwap']
+vwap_nvidia = df_nvidia['vwap']
+vwap_nasdaq = df_nasdaq['vwap']
+
 # Extract the moon phases from the moon DataFrame
 moon_phases = df_moon['Moon Phase']
 
@@ -58,6 +65,11 @@ df_combined = pd.DataFrame({
     'Closing Price NASDAQ': closing_price_nasdaq,
     'Moon Phase': moon_phases,
     'Date': date_data,
+    # 'VWAP Apple': vwap_apple,
+    # 'VWAP Tesla': vwap_tesla,
+    # 'VWAP SPY': vwap_spy,
+    # 'VWAP NVIDIA': vwap_nvidia,
+    # 'VWAP NASDAQ': vwap_nasdaq,
 })
 
 # Print the combined DataFrame
@@ -298,6 +310,12 @@ def apple_volume_vs_price_new_moon():
     ax2.set_xlabel('Date')
     ax2.set_ylabel('Stock Price')
     ax2.set_ylim(new_moon_phase['Closing Price Apple'].min(), new_moon_phase['Closing Price Apple'].max())
+    # Set x-axis tick values
+    x_ticks = np.array(new_moon_phase['Date'])
+    x_tick_labels = ['2019', '2020', '2021', '2022', '2023', '2024']
+    x_tick_positions = np.linspace(0, len(x_ticks) - 1, num=6, dtype=int)
+    ax2.set_xticks(x_tick_positions)
+    ax2.set_xticklabels(x_tick_labels)
     plt.suptitle("Apple's Stock Volume and Price during New Moon Phase")
     plt.xticks(rotation=45)
     plt.tight_layout()
@@ -327,6 +345,12 @@ def apple_volume_vs_price_full_moon():
     ax2.set_xlabel('Date')
     ax2.set_ylabel('Stock Price')
     ax2.set_ylim(full_moon_phase['Closing Price Apple'].min(), full_moon_phase['Closing Price Apple'].max())
+    # Set x-axis tick values
+    x_ticks = np.array(full_moon_phase['Date'])
+    x_tick_labels = ['2019', '2020', '2021', '2022', '2023', '2024']
+    x_tick_positions = np.linspace(0, len(x_ticks) - 1, num=6, dtype=int)
+    ax2.set_xticks(x_tick_positions)
+    ax2.set_xticklabels(x_tick_labels)
     plt.suptitle("Apple's Stock Volume and Price during Full Moon Phase")
     plt.xticks(rotation=45)
     plt.tight_layout()
@@ -356,6 +380,12 @@ def nasdaq_volume_vs_price_new_moon():
     ax2.set_xlabel('Date')
     ax2.set_ylabel('Stock Price')
     ax2.set_ylim(new_moon_phase['Closing Price NASDAQ'].min(), new_moon_phase['Closing Price NASDAQ'].max())
+    # Set x-axis tick values
+    x_ticks = np.array(new_moon_phase['Date'])
+    x_tick_labels = ['2019', '2020', '2021', '2022', '2023', '2024']
+    x_tick_positions = np.linspace(0, len(x_ticks) - 1, num=6, dtype=int)
+    ax2.set_xticks(x_tick_positions)
+    ax2.set_xticklabels(x_tick_labels)
     plt.suptitle("NASDAQ's Stock Volume and Price during New Moon Phase")
     plt.xticks(rotation=45)
     plt.tight_layout()
@@ -385,6 +415,12 @@ def nasdaq_volume_vs_price_full_moon():
     ax2.set_xlabel('Date')
     ax2.set_ylabel('Stock Price')
     ax2.set_ylim(full_moon_phase['Closing Price NASDAQ'].min(), full_moon_phase['Closing Price NASDAQ'].max())
+    # Set x-axis tick values
+    x_ticks = np.array(full_moon_phase['Date'])
+    x_tick_labels = ['2019', '2020', '2021', '2022', '2023', '2024']
+    x_tick_positions = np.linspace(0, len(x_ticks) - 1, num=6, dtype=int)
+    ax2.set_xticks(x_tick_positions)
+    ax2.set_xticklabels(x_tick_labels)
     plt.suptitle("NASDAQ's Stock Volume and Price during Full Moon Phase")
     plt.xticks(rotation=45)
     plt.tight_layout()
@@ -414,6 +450,12 @@ def nvidia_volume_vs_price_new_moon():
     ax2.set_xlabel('Date')
     ax2.set_ylabel('Stock Price')
     ax2.set_ylim(new_moon_phase['Closing Price NVIDIA'].min(), new_moon_phase['Closing Price NVIDIA'].max())
+    # Set x-axis tick values
+    x_ticks = np.array(new_moon_phase['Date'])
+    x_tick_labels = ['2019', '2020', '2021', '2022', '2023', '2024']
+    x_tick_positions = np.linspace(0, len(x_ticks) - 1, num=6, dtype=int)
+    ax2.set_xticks(x_tick_positions)
+    ax2.set_xticklabels(x_tick_labels)
     plt.suptitle("NVIDIA's Stock Volume and Price during New Moon Phase")
     plt.xticks(rotation=45)
     plt.tight_layout()
@@ -443,6 +485,12 @@ def nvidia_volume_vs_price_full_moon():
     ax2.set_xlabel('Date')
     ax2.set_ylabel('Stock Price')
     ax2.set_ylim(full_moon_phase['Closing Price NVIDIA'].min(), full_moon_phase['Closing Price NVIDIA'].max())
+    # Set x-axis tick values
+    x_ticks = np.array(full_moon_phase['Date'])
+    x_tick_labels = ['2019', '2020', '2021', '2022', '2023', '2024']
+    x_tick_positions = np.linspace(0, len(x_ticks) - 1, num=6, dtype=int)
+    ax2.set_xticks(x_tick_positions)
+    ax2.set_xticklabels(x_tick_labels)
     plt.suptitle("NVIDIA's Stock Volume and Price during Full Moon Phase")
     plt.xticks(rotation=45)
     plt.tight_layout()
@@ -472,6 +520,12 @@ def spy_volume_vs_price_new_moon():
     ax2.set_xlabel('Date')
     ax2.set_ylabel('Stock Price')
     ax2.set_ylim(new_moon_phase['Closing Price SPY'].min(), new_moon_phase['Closing Price SPY'].max())
+    # Set x-axis tick values
+    x_ticks = np.array(new_moon_phase['Date'])
+    x_tick_labels = ['2019', '2020', '2021', '2022', '2023', '2024']
+    x_tick_positions = np.linspace(0, len(x_ticks) - 1, num=6, dtype=int)
+    ax2.set_xticks(x_tick_positions)
+    ax2.set_xticklabels(x_tick_labels)
     plt.suptitle("SPY's Stock Volume and Price during New Moon Phase")
     plt.xticks(rotation=45)
     plt.tight_layout()
@@ -501,6 +555,12 @@ def spy_volume_vs_price_full_moon():
     ax2.set_xlabel('Date')
     ax2.set_ylabel('Stock Price')
     ax2.set_ylim(full_moon_phase['Closing Price SPY'].min(), full_moon_phase['Closing Price SPY'].max())
+    # Set x-axis tick values
+    x_ticks = np.array(full_moon_phase['Date'])
+    x_tick_labels = ['2019', '2020', '2021', '2022', '2023', '2024']
+    x_tick_positions = np.linspace(0, len(x_ticks) - 1, num=6, dtype=int)
+    ax2.set_xticks(x_tick_positions)
+    ax2.set_xticklabels(x_tick_labels)
     plt.suptitle("SPY's Stock Volume and Price during Full Moon Phase")
     plt.xticks(rotation=45)
     plt.tight_layout()
@@ -530,6 +590,12 @@ def tesla_volume_vs_price_new_moon():
     ax2.set_xlabel('Date')
     ax2.set_ylabel('Stock Price')
     ax2.set_ylim(new_moon_phase['Closing Price Tesla'].min(), new_moon_phase['Closing Price Tesla'].max())
+    # Set x-axis tick values
+    x_ticks = np.array(new_moon_phase['Date'])
+    x_tick_labels = ['2019', '2020', '2021', '2022', '2023', '2024']
+    x_tick_positions = np.linspace(0, len(x_ticks) - 1, num=6, dtype=int)
+    ax2.set_xticks(x_tick_positions)
+    ax2.set_xticklabels(x_tick_labels)
     plt.suptitle("Tesla's Stock Volume and Price during New Moon Phase")
     plt.xticks(rotation=45)
     plt.tight_layout()
@@ -559,6 +625,12 @@ def tesla_volume_vs_price_full_moon():
     ax2.set_xlabel('Date')
     ax2.set_ylabel('Stock Price')
     ax2.set_ylim(full_moon_phase['Closing Price Tesla'].min(), full_moon_phase['Closing Price Tesla'].max())
+    # Set x-axis tick values
+    x_ticks = np.array(full_moon_phase['Date'])
+    x_tick_labels = ['2019', '2020', '2021', '2022', '2023', '2024']
+    x_tick_positions = np.linspace(0, len(x_ticks) - 1, num=6, dtype=int)
+    ax2.set_xticks(x_tick_positions)
+    ax2.set_xticklabels(x_tick_labels)
     plt.suptitle("Tesla's Stock Volume and Price during Full Moon Phase")
     plt.xticks(rotation=45)
     plt.tight_layout()
