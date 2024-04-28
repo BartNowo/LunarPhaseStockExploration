@@ -206,8 +206,8 @@ def moon_phase_graph(): # Plotting the bar graph
     ax6.set_title('Moon Data Over Time')
 moon_phase_graph()
 
-# Create a figure with 6 subplots: scatterplot visuals and ... 
-fig2, ([ax7, ax8, ax9], [ax10, ax11, ax12]) = plt.subplots(2, 3, figsize=(20, 20))
+# Create a figure with 3 subplots: cross-correlation visuals
+fig2, ([ax7, ax8, ax9]) = plt.subplots(1, 3, figsize=(20, 20))
 
 def cross_correlation_visual_new_moon(): # Visualize the correlation between the new moon phase and all stocks with the cross-correlation graph
     def crosscorr(data1, data2, lag=0): # Function to calculate cross-correlation between two time series
@@ -270,6 +270,9 @@ def cross_correlation_visual_all_moonphases(): # Visualize the correlation betwe
     ax9.set_title('Cross-Correlation: Volume vs All Moon Phases')
     ax9.legend()
 cross_correlation_visual_all_moonphases()
+
+# Create a figure with 1 subplot: bar graph
+fig3, (ax10) = plt.subplots(1, 1, figsize=(10, 10))
 
 def average_daily_stock_volume_change_percentage_moon_phase(): # Visualize the average daily stock volume change percentage as bar graphs for each stock
     moon_phases_filter = ['New Moon', 'Waxing Crescent Moon', 'First Quarter Moon', 'Waxing Gibbous Moon', 'Full Moon', 'Waning Gibbous Moon', 'Last Quarter Moon', 'Waning Crescent Moon']
