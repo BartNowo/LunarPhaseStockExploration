@@ -207,94 +207,94 @@ def moon_phase_graph(): # Plotting the bar graph
 moon_phase_graph()
 
 # Create a figure with 6 subplots: scatterplot visuals and ... 
-# fig2, ([ax7, ax8, ax9], [ax10, ax11, ax12]) = plt.subplots(2, 3, figsize=(20, 20))
+fig2, ([ax7, ax8, ax9], [ax10, ax11, ax12]) = plt.subplots(2, 3, figsize=(20, 20))
 
-# def cross_correlation_visual_new_moon(): # Visualize the correlation between the new moon phase and all stocks with the cross-correlation graph
-#     def crosscorr(data1, data2, lag=0): # Function to calculate cross-correlation between two time series
-#         return data1.corr(data2.shift(lag))
-#     new_moon_phase = df_combined[df_combined['Moon Phase'] == 'New Moon'] # Select only the rows with new moon phase
-#     new_moon_phase = new_moon_phase.dropna(subset=['Apple Volume', 'NASDAQ Volume', 'NVIDIA Volume', 'SPY Volume', 'Tesla Volume'])
-#     # Calculate cross-correlation between new moon phase and stock volumes
-#     cross_corr = {}
-#     lags = range(-100, 101)
-#     for column in df_combined.columns[:-7]:
-#         cross_corr[column] = [crosscorr(new_moon_phase[column], df_combined[column], lag) for lag in lags]
-#     # Plot cross-correlation as a line graph
-#     for column, values in cross_corr.items():
-#         ax7.plot(lags, values, label=column)
-#     ax7.axhline(-1, color='black', linestyle='--')
-#     ax7.set_xlabel('Lag')
-#     ax7.set_ylabel('Correlation')
-#     ax7.set_title('Cross-Correlation: Volume vs New Moon Phase')
-#     ax7.legend()
-# cross_correlation_visual_new_moon()
+def cross_correlation_visual_new_moon(): # Visualize the correlation between the new moon phase and all stocks with the cross-correlation graph
+    def crosscorr(data1, data2, lag=0): # Function to calculate cross-correlation between two time series
+        return data1.corr(data2.shift(lag))
+    new_moon_phase = df_combined[df_combined['Moon Phase'] == 'New Moon'] # Select only the rows with new moon phase
+    new_moon_phase = new_moon_phase.dropna(subset=['Apple Volume', 'NASDAQ Volume', 'NVIDIA Volume', 'SPY Volume', 'Tesla Volume'])
+    # Calculate cross-correlation between new moon phase and stock volumes
+    cross_corr = {}
+    lags = range(-100, 101)
+    for column in df_combined.columns[:-7]:
+        cross_corr[column] = [crosscorr(new_moon_phase[column], df_combined[column], lag) for lag in lags]
+    # Plot cross-correlation as a line graph
+    for column, values in cross_corr.items():
+        ax7.plot(lags, values, label=column)
+    ax7.axhline(-1, color='black', linestyle='--')
+    ax7.set_xlabel('Lag')
+    ax7.set_ylabel('Correlation')
+    ax7.set_title('Cross-Correlation: Volume vs New Moon Phase')
+    ax7.legend()
+cross_correlation_visual_new_moon()
 
-# def cross_correlation_visual_full_moon(): # Visualize the correlation between the full moon phase and all stocks with the cross-correlation graph
-#     def crosscorr(data1, data2, lag=0): # Function to calculate cross-correlation between two time series
-#         return data1.corr(data2.shift(lag))
-#     full_moon_phase = df_combined[df_combined['Moon Phase'] == 'Full Moon'] # Select only the rows with full moon phase
-#     full_moon_phase = full_moon_phase.dropna(subset=['Apple Volume', 'NASDAQ Volume', 'NVIDIA Volume', 'SPY Volume', 'Tesla Volume'])
-#     # Calculate cross-correlation between full moon phase and stock volumes
-#     cross_corr = {}
-#     lags = range(-40, 41)
-#     for column in df_combined.columns[:-7]:
-#         cross_corr[column] = [crosscorr(full_moon_phase[column], df_combined[column], lag) for lag in lags]
-#     # Plot cross-correlation as a line graph
-#     for column, values in cross_corr.items():
-#         ax8.plot(lags, values, label=column)
-#     ax8.axhline(-1, color='black', linestyle='--')
-#     ax8.set_xlabel('Lag')
-#     ax8.set_ylabel('Correlation')
-#     ax8.set_title('Cross-Correlation: Volume vs Full Moon Phase')
-#     ax8.legend()
-# cross_correlation_visual_full_moon()
+def cross_correlation_visual_full_moon(): # Visualize the correlation between the full moon phase and all stocks with the cross-correlation graph
+    def crosscorr(data1, data2, lag=0): # Function to calculate cross-correlation between two time series
+        return data1.corr(data2.shift(lag))
+    full_moon_phase = df_combined[df_combined['Moon Phase'] == 'Full Moon'] # Select only the rows with full moon phase
+    full_moon_phase = full_moon_phase.dropna(subset=['Apple Volume', 'NASDAQ Volume', 'NVIDIA Volume', 'SPY Volume', 'Tesla Volume'])
+    # Calculate cross-correlation between full moon phase and stock volumes
+    cross_corr = {}
+    lags = range(-40, 41)
+    for column in df_combined.columns[:-7]:
+        cross_corr[column] = [crosscorr(full_moon_phase[column], df_combined[column], lag) for lag in lags]
+    # Plot cross-correlation as a line graph
+    for column, values in cross_corr.items():
+        ax8.plot(lags, values, label=column)
+    ax8.axhline(-1, color='black', linestyle='--')
+    ax8.set_xlabel('Lag')
+    ax8.set_ylabel('Correlation')
+    ax8.set_title('Cross-Correlation: Volume vs Full Moon Phase')
+    ax8.legend()
+cross_correlation_visual_full_moon()
 
-# def cross_correlation_visual_all_moonphases(): # Visualize the correlation between all moon phases and all stocks with the cross-correlation graph
-#     def crosscorr(data1, data2, lag=0): # Function to calculate cross-correlation between two time series
-#         return data1.corr(data2.shift(lag))
-#     # Filter the combined DataFrame for the desired moon phases
-#     moon_phases_filter = ['New Moon', 'Waxing Crescent Moon', 'First Quarter Moon', 'Waxing Gibbous Moon', 'Full Moon', 'Waning Gibbous Moon', 'Last Quarter Moon', 'Waning Crescent Moon']
-#     filtered_data = df_combined[df_combined['Moon Phase'].isin(moon_phases_filter)]
-#     filtered_data = filtered_data.dropna(subset=['Apple Volume', 'NASDAQ Volume', 'NVIDIA Volume', 'SPY Volume', 'Tesla Volume'])
-#     # Calculate cross-correlation between all moon phases and stock volumes
-#     cross_corr = {}
-#     lags = range(-40, 41)
-#     for column in df_combined.columns[:-7]:
-#         cross_corr[column] = [crosscorr(filtered_data[column], df_combined[column], lag) for lag in lags]
-#     # Plot cross-correlation as a line graph
-#     for column, values in cross_corr.items():
-#         ax9.plot(lags, values, label=column)
-#     ax9.axhline(-1, color='black', linestyle='--')
-#     ax9.set_xlabel('Lag')
-#     ax9.set_ylabel('Correlation')
-#     ax9.set_title('Cross-Correlation: Volume vs All Moon Phases')
-#     ax9.legend()
-# cross_correlation_visual_all_moonphases()
+def cross_correlation_visual_all_moonphases(): # Visualize the correlation between all moon phases and all stocks with the cross-correlation graph
+    def crosscorr(data1, data2, lag=0): # Function to calculate cross-correlation between two time series
+        return data1.corr(data2.shift(lag))
+    # Filter the combined DataFrame for the desired moon phases
+    moon_phases_filter = ['New Moon', 'Waxing Crescent Moon', 'First Quarter Moon', 'Waxing Gibbous Moon', 'Full Moon', 'Waning Gibbous Moon', 'Last Quarter Moon', 'Waning Crescent Moon']
+    filtered_data = df_combined[df_combined['Moon Phase'].isin(moon_phases_filter)]
+    filtered_data = filtered_data.dropna(subset=['Apple Volume', 'NASDAQ Volume', 'NVIDIA Volume', 'SPY Volume', 'Tesla Volume'])
+    # Calculate cross-correlation between all moon phases and stock volumes
+    cross_corr = {}
+    lags = range(-40, 41)
+    for column in df_combined.columns[:-7]:
+        cross_corr[column] = [crosscorr(filtered_data[column], df_combined[column], lag) for lag in lags]
+    # Plot cross-correlation as a line graph
+    for column, values in cross_corr.items():
+        ax9.plot(lags, values, label=column)
+    ax9.axhline(-1, color='black', linestyle='--')
+    ax9.set_xlabel('Lag')
+    ax9.set_ylabel('Correlation')
+    ax9.set_title('Cross-Correlation: Volume vs All Moon Phases')
+    ax9.legend()
+cross_correlation_visual_all_moonphases()
 
-# def average_daily_stock_volume_change_percentage_moon_phase(): # Visualize the average daily stock volume change percentage as bar graphs for each stock
-#     moon_phases_filter = ['New Moon', 'Waxing Crescent Moon', 'First Quarter Moon', 'Waxing Gibbous Moon', 'Full Moon', 'Waning Gibbous Moon', 'Last Quarter Moon', 'Waning Crescent Moon']
-#     filtered_data = df_combined[df_combined['Moon Phase'].isin(moon_phases_filter)]
-#     filtered_data = filtered_data.dropna(subset=['Apple Volume', 'NASDAQ Volume', 'NVIDIA Volume', 'SPY Volume', 'Tesla Volume'])
-#     # Calculate the average daily value of stock volume for each stock
-#     average_volume_apple = filtered_data['Apple Volume'].mean()
-#     average_volume_nasdaq = filtered_data['NASDAQ Volume'].mean()
-#     average_volume_nvidia = filtered_data['NVIDIA Volume'].mean()
-#     average_volume_spy = filtered_data['SPY Volume'].mean()
-#     average_volume_tesla = filtered_data['Tesla Volume'].mean()
-#     # Calculate the volume change percentage for each stock
-#     initial_volumes = [filtered_data['Apple Volume'].iloc[0], filtered_data['NASDAQ Volume'].iloc[0], filtered_data['NVIDIA Volume'].iloc[0], filtered_data['SPY Volume'].iloc[0], filtered_data['Tesla Volume'].iloc[0]]
-#     volume_changes = [(average_volume_apple - initial_volumes[0]) / initial_volumes[0] * 100,
-#                       (average_volume_nasdaq - initial_volumes[1]) / initial_volumes[1] * 100,
-#                       (average_volume_nvidia - initial_volumes[2]) / initial_volumes[2] * 100,
-#                       (average_volume_spy - initial_volumes[3]) / initial_volumes[3] * 100,
-#                       (average_volume_tesla - initial_volumes[4]) / initial_volumes[4] * 100]
-#     # Create a bar graph of the average daily volume change percentage for each stock
-#     stocks = ['Apple', 'NASDAQ', 'NVIDIA', 'SPY', 'Tesla']
-#     ax10.bar(stocks, volume_changes)
-#     ax10.set_xlabel('Stock')
-#     ax10.set_ylabel('Average Daily Volume Change (%)')
-#     ax10.set_title('Average Daily Stock Volume Change (%) by Stock')
-# average_daily_stock_volume_change_percentage_moon_phase()
+def average_daily_stock_volume_change_percentage_moon_phase(): # Visualize the average daily stock volume change percentage as bar graphs for each stock
+    moon_phases_filter = ['New Moon', 'Waxing Crescent Moon', 'First Quarter Moon', 'Waxing Gibbous Moon', 'Full Moon', 'Waning Gibbous Moon', 'Last Quarter Moon', 'Waning Crescent Moon']
+    filtered_data = df_combined[df_combined['Moon Phase'].isin(moon_phases_filter)]
+    filtered_data = filtered_data.dropna(subset=['Apple Volume', 'NASDAQ Volume', 'NVIDIA Volume', 'SPY Volume', 'Tesla Volume'])
+    # Calculate the average daily value of stock volume for each stock
+    average_volume_apple = filtered_data['Apple Volume'].mean()
+    average_volume_nasdaq = filtered_data['NASDAQ Volume'].mean()
+    average_volume_nvidia = filtered_data['NVIDIA Volume'].mean()
+    average_volume_spy = filtered_data['SPY Volume'].mean()
+    average_volume_tesla = filtered_data['Tesla Volume'].mean()
+    # Calculate the volume change percentage for each stock
+    initial_volumes = [filtered_data['Apple Volume'].iloc[0], filtered_data['NASDAQ Volume'].iloc[0], filtered_data['NVIDIA Volume'].iloc[0], filtered_data['SPY Volume'].iloc[0], filtered_data['Tesla Volume'].iloc[0]]
+    volume_changes = [(average_volume_apple - initial_volumes[0]) / initial_volumes[0] * 100,
+                      (average_volume_nasdaq - initial_volumes[1]) / initial_volumes[1] * 100,
+                      (average_volume_nvidia - initial_volumes[2]) / initial_volumes[2] * 100,
+                      (average_volume_spy - initial_volumes[3]) / initial_volumes[3] * 100,
+                      (average_volume_tesla - initial_volumes[4]) / initial_volumes[4] * 100]
+    # Create a bar graph of the average daily volume change percentage for each stock
+    stocks = ['Apple', 'NASDAQ', 'NVIDIA', 'SPY', 'Tesla']
+    ax10.bar(stocks, volume_changes)
+    ax10.set_xlabel('Stock')
+    ax10.set_ylabel('Average Daily Volume Change (%)')
+    ax10.set_title('Average Daily Stock Volume Change (%) by Stock')
+average_daily_stock_volume_change_percentage_moon_phase()
 
 def apple_volume_vs_price_new_moon():
     new_moon_phase = df_combined[df_combined['Moon Phase'] == 'New Moon']
@@ -652,7 +652,7 @@ fig.subplots_adjust(hspace=0.2, wspace=0.2)
 
 # Save the figures
 fig.savefig("emilio_plots.png")
-# fig2.savefig("emilio_plots_2.png")
+fig2.savefig("emilio_plots_2.png")
 
 # Show the figures
 plt.show()
