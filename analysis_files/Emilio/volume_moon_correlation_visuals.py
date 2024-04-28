@@ -272,7 +272,7 @@ def cross_correlation_visual_all_moonphases(): # Visualize the correlation betwe
 cross_correlation_visual_all_moonphases()
 
 # Create a figure with 1 subplot: bar graph
-fig3, (ax10) = plt.subplots(1, 1, figsize=(10, 10))
+fig10, (ax10) = plt.subplots(1, 1, figsize=(10, 10))
 
 def average_daily_stock_volume_change_percentage_moon_phase(): # Visualize the average daily stock volume change percentage as bar graphs for each stock
     moon_phases_filter = ['New Moon', 'Waxing Crescent Moon', 'First Quarter Moon', 'Waxing Gibbous Moon', 'Full Moon', 'Waning Gibbous Moon', 'Last Quarter Moon', 'Waning Crescent Moon']
@@ -297,6 +297,7 @@ def average_daily_stock_volume_change_percentage_moon_phase(): # Visualize the a
     ax10.set_xlabel('Stock')
     ax10.set_ylabel('Average Daily Volume Change (%)')
     ax10.set_title('Average Daily Stock Volume Change (%) by Stock')
+    fig10.savefig("emilio_plots_13.png")
 average_daily_stock_volume_change_percentage_moon_phase()
 
 def apple_volume_vs_price_new_moon():
