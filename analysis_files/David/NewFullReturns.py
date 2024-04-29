@@ -47,21 +47,15 @@ merged_stock_df = pd.merge(
 
 merged_stock_df['Date'] = pd.to_datetime(merged_stock_df['Date'])
 
-stock_2021 = merged_stock_df[merged_stock_df['Date'].dt.year == 2021]
-stock_2022 = merged_stock_df[merged_stock_df['Date'].dt.year == 2022]
-stock_2023 = merged_stock_df[merged_stock_df['Date'].dt.year == 2023]
+def filter_and_calculate_returns(merged_stock_df, year):
+    stock_year = merged_stock_df[merged_stock_df['Date'].dt.year == year]
+    stock_year['Daily_Return'] = stock_year['close'].pct_change() * 100
+    return stock_year
 
-stock_2021['Daily_Return'] = stock_2021['close'].pct_change() * 100
-stock_2022['Daily_Return'] = stock_2022['close'].pct_change() * 100
-stock_2023['Daily_Return'] = stock_2023['close'].pct_change() * 100
-
-stock_2021 = merged_stock_df[merged_stock_df['Date'].dt.year == 2021]
-stock_2022 = merged_stock_df[merged_stock_df['Date'].dt.year == 2022]
-stock_2023 = merged_stock_df[merged_stock_df['Date'].dt.year == 2023]
-
-stock_2021['Daily_Return'] = stock_2021['close'].pct_change() * 100
-stock_2022['Daily_Return'] = stock_2022['close'].pct_change() * 100
-stock_2023['Daily_Return'] = stock_2023['close'].pct_change() * 100
+# Call the function for each year
+stock_2021 = filter_and_calculate_returns(merged_stock_df, 2021)
+stock_2022 = filter_and_calculate_returns(merged_stock_df, 2022)
+stock_2023 = filter_and_calculate_returns(merged_stock_df, 2023)
 
 def calculate_average_returns(stock_df, year):
     full_moon_avg_return = stock_df[stock_df['Moon Phase'] == 'Full Moon']['Daily_Return'].mean()
@@ -77,7 +71,7 @@ calculate_average_returns(stock_2023, 2023)
 
 # Create subplots
 fig, axes = plt.subplots(nrows=1, ncols=3, figsize=(18, 6))
-fig.suptitle(stock_symbol.upper() + " Stock New and Full Moon Returns (2021-2023)")
+fig.suptitle(stock_symbol.upper() + " Stock New and Full Moon Daily Returns and Volatility (2021-2023)")
 
 # Plot for 2021
 axes[0].plot(stock_2021[stock_2021['Moon Phase'] == 'Full Moon']['Date'],
@@ -119,4 +113,3 @@ axes[2].legend()
 # Show the plots
 plt.tight_layout()
 plt.show()
-
