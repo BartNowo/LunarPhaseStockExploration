@@ -1,6 +1,10 @@
 import pandas as pd
 from pathlib import Path
 import matplotlib.pyplot as plt
+import warnings
+
+# Suppress FutureWarning messages
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 def read_stock_data(stock_symbol, path_to_stock_csv):
     stock_data = pd.read_csv(path_to_stock_csv)
@@ -64,7 +68,7 @@ merged_data_apple = merge_data(stock_data_apple, moon_data)
 for symbol, merged_data in zip(['NVIDIA', 'NASDAQ', 'SPY', 'TESLA', 'APPLE'], [merged_data_nvidia, merged_data_nasdaq, merged_data_spy, merged_data_tesla, merged_data_apple]):
     for year in range(2021, 2024):
         stock_year = filter_and_calculate_returns(merged_data, year)
-    calculate_average_returns(stock_year, year, keywords)
+        calculate_average_returns(stock_year, year, keywords)
 
 # Create subplots
 fig, axes = plt.subplots(nrows=1, ncols=3, figsize=(18, 6))
@@ -88,3 +92,39 @@ for i, year in enumerate(range(2021, 2024)):
 # Show the plots
 plt.tight_layout()
 plt.show()
+
+# output without warnings:
+# Would you like to study a crescent or gibbous? c
+
+# Average Returns during Waning Crescent (2023): 1.41%
+# Average Returns during Waxing Crescent (2023): 1.00%
+
+# Average Returns during Waning Crescent (2023): 0.33%
+# Average Returns during Waxing Crescent (2023): -0.37%
+
+# Average Returns during Waning Crescent (2023): 0.28%
+# Average Returns during Waxing Crescent (2023): -0.03%
+
+# Average Returns during Waning Crescent (2023): 0.71%
+# Average Returns during Waxing Crescent (2023): 0.28%
+
+# Average Returns during Waning Crescent (2023): 0.31%
+# Average Returns during Waxing Crescent (2023): 0.12%
+
+
+# Would you like to study a crescent or gibbous? g
+
+# Average Returns during Waning Gibbous (2023): 0.58%
+# Average Returns during Waxing Gibbous (2023): 0.24%
+
+# Average Returns during Waning Gibbous (2023): 0.38%
+# Average Returns during Waxing Gibbous (2023): -0.07%
+
+# Average Returns during Waning Gibbous (2023): 0.22%
+# Average Returns during Waxing Gibbous (2023): 0.10%
+
+# Average Returns during Waning Gibbous (2023): 0.84%
+# Average Returns during Waxing Gibbous (2023): 0.63%
+
+# Average Returns during Waning Gibbous (2023): 0.21%
+# Average Returns during Waxing Gibbous (2023): 0.38%
